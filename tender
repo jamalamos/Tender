@@ -1,0 +1,796 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Find tender opportunities and track procurement deadlines.">
+<title>Tender Alert Kenya | Find Opportunities</title>
+
+<style>
+:root {
+  --navy: #10233f;
+  --blue: #2457d6;
+  --light: #f6f8fc;
+  --text: #182230;
+  --muted: #667085;
+  --border: #e4e8ef;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: var(--light);
+  color: var(--text);
+  line-height: 1.6;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+header {
+  background: white;
+  border-bottom: 1px solid var(--border);
+  padding: 15px 6%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 15px;
+}
+
+.logo {
+  font-size: 21px;
+  font-weight: bold;
+  color: var(--navy);
+}
+
+.logo span {
+  color: var(--blue);
+}
+
+nav {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+}
+
+nav a {
+  font-size: 14px;
+  font-weight: bold;
+}
+
+.button {
+  background: var(--blue);
+  color: white;
+  border: none;
+  padding: 12px 17px;
+  border-radius: 8px;
+  cursor: pointer;
+  display: inline-block;
+  font-weight: bold;
+}
+
+.button:hover {
+  background: #183fa9;
+}
+
+.hero {
+  background: linear-gradient(120deg, #10233f, #2457a8);
+  color: white;
+  padding: 65px 6%;
+}
+
+.hero-content {
+  max-width: 1150px;
+  margin: auto;
+}
+
+.hero h1 {
+  font-size: clamp(32px, 5vw, 52px);
+  line-height: 1.15;
+  margin: 15px 0;
+}
+
+.hero p {
+  max-width: 650px;
+  color: #e0e8f7;
+}
+
+.search-box {
+  display: flex;
+  gap: 10px;
+  margin-top: 25px;
+  max-width: 700px;
+}
+
+.search-box input {
+  flex: 1;
+  min-width: 0;
+  padding: 14px;
+  border: none;
+  border-radius: 8px;
+  font-size: 15px;
+}
+
+.container {
+  max-width: 1150px;
+  margin: auto;
+  padding: 35px 20px 55px;
+}
+
+.stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 15px;
+  margin-bottom: 35px;
+}
+
+.stat-card {
+  background: white;
+  border: 1px solid var(--border);
+  padding: 20px;
+  border-radius: 12px;
+}
+
+.stat-card strong {
+  display: block;
+  font-size: 25px;
+  color: var(--navy);
+}
+
+.stat-card span {
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.section-heading {
+  margin: 25px 0 20px;
+}
+
+.section-heading h2 {
+  margin-bottom: 5px;
+}
+
+.section-heading p {
+  color: var(--muted);
+  margin-top: 0;
+}
+
+.layout {
+  display: grid;
+  grid-template-columns: 240px 1fr;
+  gap: 20px;
+}
+
+.filters,
+.tender-card,
+.newsletter {
+  background: white;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+}
+
+.filters {
+  padding: 20px;
+  height: fit-content;
+}
+
+.filters h3 {
+  margin-top: 0;
+}
+
+.field {
+  margin-bottom: 18px;
+}
+
+.field label {
+  display: block;
+  font-size: 13px;
+  font-weight: bold;
+  margin-bottom: 7px;
+}
+
+.field select,
+.field input {
+  width: 100%;
+  padding: 11px;
+  border: 1px solid #d5dce7;
+  border-radius: 7px;
+  background: white;
+}
+
+.checkbox {
+  display: flex;
+  gap: 8px;
+  font-size: 13px;
+}
+
+.results-count {
+  color: var(--muted);
+  font-size: 13px;
+  margin-bottom: 12px;
+}
+
+.tender-list {
+  display: grid;
+  gap: 15px;
+}
+
+.tender-card {
+  padding: 20px;
+}
+
+.organization {
+  font-size: 12px;
+  font-weight: bold;
+  color: var(--muted);
+  text-transform: uppercase;
+}
+
+.tender-card h3 {
+  margin: 8px 0;
+  font-size: 19px;
+  line-height: 1.4;
+}
+
+.description {
+  color: #586579;
+  font-size: 14px;
+}
+
+.tag {
+  display: inline-block;
+  padding: 5px 10px;
+  background: #eaf0ff;
+  color: #2349a6;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: bold;
+}
+
+.deadline {
+  margin: 15px 0;
+  font-size: 13px;
+}
+
+.card-actions {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.save-button {
+  padding: 10px 13px;
+  border: 1px solid #ccd5e3;
+  background: white;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.notice {
+  margin-top: 20px;
+  padding: 14px;
+  border: 1px solid #f1d49a;
+  background: #fff9eb;
+  color: #79520b;
+  border-radius: 8px;
+  font-size: 13px;
+}
+
+.newsletter {
+  margin-top: 35px;
+  padding: 25px;
+}
+
+.newsletter form {
+  display: flex;
+  gap: 10px;
+  margin-top: 15px;
+}
+
+.newsletter input {
+  flex: 1;
+  min-width: 0;
+  padding: 12px;
+  border: 1px solid #ccd5e3;
+  border-radius: 8px;
+}
+
+footer {
+  background: white;
+  border-top: 1px solid var(--border);
+  padding: 25px 6%;
+  color: var(--muted);
+  font-size: 12px;
+  text-align: center;
+}
+
+.toast {
+  display: none;
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--navy);
+  color: white;
+  padding: 12px 18px;
+  border-radius: 8px;
+  max-width: 90%;
+  z-index: 10;
+}
+
+@media (max-width: 750px) {
+  header {
+    flex-wrap: wrap;
+  }
+
+  nav {
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+
+  .layout {
+    grid-template-columns: 1fr;
+  }
+
+  .stats {
+    gap: 8px;
+  }
+
+  .stat-card {
+    padding: 12px;
+  }
+
+  .stat-card strong {
+    font-size: 20px;
+  }
+}
+
+@media (max-width: 480px) {
+  nav a:not(.button) {
+    display: none;
+  }
+
+  .hero {
+    padding: 45px 20px;
+  }
+
+  .search-box,
+  .newsletter form {
+    flex-direction: column;
+  }
+
+  .stats {
+    grid-template-columns: 1fr;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <a href="#" class="logo">Tender Alert <span>Kenya</span></a>
+
+  <nav>
+    <a href="#tenders">Browse Tenders</a>
+    <a href="#how">How It Works</a>
+    <a href="#alerts" class="button">Get Alerts</a>
+  </nav>
+</header>
+
+<section class="hero">
+  <div class="hero-content">
+    <span class="tag">PROCUREMENT OPPORTUNITIES</span>
+
+    <h1>Find Your Next<br>Business Opportunity.</h1>
+
+    <p>
+      Discover tender opportunities, review requirements,
+      track closing dates, and access official procurement notices.
+    </p>
+
+    <form class="search-box" id="searchForm">
+      <input
+        type="search"
+        id="searchInput"
+        placeholder="Search tenders, organizations, or keywords..."
+        aria-label="Search tenders"
+      >
+      <button class="button" type="submit">Search Tenders</button>
+    </form>
+  </div>
+</section>
+
+<main class="container">
+
+  <section class="stats">
+    <div class="stat-card">
+      <strong id="totalCount">6</strong>
+      <span>Sample Opportunities</span>
+    </div>
+
+    <div class="stat-card">
+      <strong>6</strong>
+      <span>Industry Categories</span>
+    </div>
+
+    <div class="stat-card">
+      <strong>Free</strong>
+      <span>Browse This Demo</span>
+    </div>
+  </section>
+
+  <section id="tenders">
+    <div class="section-heading">
+      <h2>Explore Tender Opportunities</h2>
+      <p>Find opportunities that match your business.</p>
+    </div>
+
+    <div class="layout">
+
+      <aside class="filters">
+        <h3>Filter Tenders</h3>
+
+        <div class="field">
+          <label for="categoryFilter">Industry</label>
+          <select id="categoryFilter">
+            <option value="">All Industries</option>
+            <option>Construction</option>
+            <option>ICT & Technology</option>
+            <option>Office Supplies</option>
+            <option>Medical Supplies</option>
+            <option>Transport</option>
+            <option>Cleaning & Sanitation</option>
+          </select>
+        </div>
+
+        <div class="field">
+          <label for="buyerFilter">Organization Type</label>
+          <select id="buyerFilter">
+            <option value="">All Organizations</option>
+            <option>Public sector</option>
+            <option>Private sector</option>
+            <option>NGO / Development</option>
+          </select>
+        </div>
+
+        <div class="field">
+          <label for="deadlineFilter">Closing Date</label>
+          <select id="deadlineFilter">
+            <option value="">Any Date</option>
+            <option value="7">Within 7 Days</option>
+            <option value="14">Within 14 Days</option>
+            <option value="30">Within 30 Days</option>
+          </select>
+        </div>
+
+        <label class="checkbox">
+          <input type="checkbox" id="openOnly">
+          Open opportunities only
+        </label>
+
+        <button
+          class="save-button"
+          id="resetButton"
+          style="margin-top:18px;width:100%"
+          type="button"
+        >
+          Reset Filters
+        </button>
+      </aside>
+
+      <section>
+        <div class="results-count" id="resultsCount">
+          Showing 6 sample opportunities
+        </div>
+
+        <div class="tender-list" id="tenderList"></div>
+      </section>
+
+    </div>
+
+    <div class="notice">
+      <strong>Demo notice:</strong>
+      The listings below are fictional examples for testing the website.
+      They are not genuine tender notices. Replace them with verified
+      opportunities and official source links before launching.
+    </div>
+  </section>
+
+  <section id="how" class="newsletter">
+    <h2>How It Works</h2>
+    <p>1. Search for tenders relevant to your industry.</p>
+    <p>2. Review the closing date and requirements.</p>
+    <p>3. Follow the official source to obtain documents and apply.</p>
+    <p>4. Sign up for alerts when that feature becomes available.</p>
+  </section>
+
+  <section id="alerts" class="newsletter">
+    <h2>Get Tender Alerts</h2>
+    <p>Join the early-access list for future email notifications.</p>
+
+    <form id="subscribeForm">
+      <input
+        type="email"
+        id="emailInput"
+        placeholder="Enter your email address"
+        aria-label="Email address"
+        required
+      >
+      <button class="button" type="submit">Notify Me</button>
+    </form>
+
+    <p style="font-size:12px;color:#667085">
+      Prototype only: email addresses are not stored or sent anywhere.
+    </p>
+  </section>
+
+</main>
+
+<footer>
+  <p>© <span id="year"></span> Tender Alert Kenya. All rights reserved.</p>
+  <p>Always verify deadlines, eligibility, and documents with the issuing organization.</p>
+</footer>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script>
+const tenders = [
+  {
+    id: 1,
+    title: "Supply of Office Stationery and General Supplies",
+    org: "Sample County Department",
+    category: "Office Supplies",
+    type: "Public sector",
+    location: "Kenya",
+    deadline: "2026-11-20",
+    status: "Open",
+    description: "Sample opportunity for stationery, paper, printing supplies, and general office products."
+  },
+  {
+    id: 2,
+    title: "Road Maintenance and Minor Civil Works",
+    org: "Example Public Works Agency",
+    category: "Construction",
+    type: "Public sector",
+    location: "Kenya",
+    deadline: "2026-11-12",
+    status: "Open",
+    description: "Sample opportunity for road maintenance, drainage repairs, and related civil works."
+  },
+  {
+    id: 3,
+    title: "Supply and Installation of Network Equipment",
+    org: "Example Technology Organization",
+    category: "ICT & Technology",
+    type: "Private sector",
+    location: "Nairobi, Kenya",
+    deadline: "2026-11-25",
+    status: "Open",
+    description: "Sample opportunity for networking equipment, installation, configuration, and support."
+  },
+  {
+    id: 4,
+    title: "Supply of Medical Consumables",
+    org: "Sample Health Program",
+    category: "Medical Supplies",
+    type: "NGO / Development",
+    location: "Kenya",
+    deadline: "2026-11-15",
+    status: "Open",
+    description: "Sample opportunity for medical gloves, dressings, and basic clinical supplies."
+  },
+  {
+    id: 5,
+    title: "Cleaning and Sanitation Services",
+    org: "Example Commercial Property Group",
+    category: "Cleaning & Sanitation",
+    type: "Private sector",
+    location: "Nairobi, Kenya",
+    deadline: "2026-12-03",
+    status: "Open",
+    description: "Sample opportunity for cleaning, sanitation, and waste-handling services."
+  },
+  {
+    id: 6,
+    title: "Vehicle Hire and Transport Services",
+    org: "Sample Project Coordination Office",
+    category: "Transport",
+    type: "NGO / Development",
+    location: "Kenya",
+    deadline: "2026-11-08",
+    status: "Open",
+    description: "Sample opportunity for vehicle hire and local project transportation."
+  }
+];
+
+const searchInput = document.getElementById("searchInput");
+const categoryFilter = document.getElementById("categoryFilter");
+const buyerFilter = document.getElementById("buyerFilter");
+const deadlineFilter = document.getElementById("deadlineFilter");
+const openOnly = document.getElementById("openOnly");
+const tenderList = document.getElementById("tenderList");
+
+function daysUntil(dateString) {
+  const today = new Date();
+  today.setHours(0, 0, 0, 0);
+
+  const deadline = new Date(dateString + "T00:00:00");
+  return Math.ceil((deadline - today) / 86400000);
+}
+
+function formatDate(dateString) {
+  return new Date(dateString + "T12:00:00")
+    .toLocaleDateString("en-KE", {
+      day: "numeric",
+      month: "short",
+      year: "numeric"
+    });
+}
+
+function showToast(message) {
+  const toast = document.getElementById("toast");
+
+  toast.textContent = message;
+  toast.style.display = "block";
+
+  clearTimeout(window.toastTimer);
+
+  window.toastTimer = setTimeout(() => {
+    toast.style.display = "none";
+  }, 3500);
+}
+
+function renderTenders() {
+  const keyword = searchInput.value.trim().toLowerCase();
+  const category = categoryFilter.value;
+  const buyer = buyerFilter.value;
+  const days = deadlineFilter.value;
+
+  const filtered = tenders.filter(tender => {
+    const searchableText = [
+      tender.title,
+      tender.org,
+      tender.category,
+      tender.description,
+      tender.location
+    ].join(" ").toLowerCase();
+
+    return (
+      (!keyword || searchableText.includes(keyword)) &&
+      (!category || tender.category === category) &&
+      (!buyer || tender.type === buyer) &&
+      (!openOnly.checked || tender.status === "Open") &&
+      (!days ||
+        (daysUntil(tender.deadline) >= 0 &&
+         daysUntil(tender.deadline) <= Number(days)))
+    );
+  });
+
+  document.getElementById("resultsCount").textContent =
+    `Showing ${filtered.length} sample ${
+      filtered.length === 1 ? "opportunity" : "opportunities"
+    }`;
+
+  document.getElementById("totalCount").textContent = tenders.length;
+
+  if (filtered.length === 0) {
+    tenderList.innerHTML =
+      '<div class="tender-card">No matching sample tenders. Try changing your filters.</div>';
+    return;
+  }
+
+  tenderList.innerHTML = filtered.map(tender => {
+    const remaining = daysUntil(tender.deadline);
+
+    let deadlineText;
+
+    if (remaining < 0) {
+      deadlineText = "Closing date passed";
+    } else if (remaining === 0) {
+      deadlineText = "Closes today";
+    } else {
+      deadlineText = `${remaining} days remaining`;
+    }
+
+    return `
+      <article class="tender-card">
+        <div class="organization">${tender.org}</div>
+
+        <h3>${tender.title}</h3>
+
+        <p class="description">${tender.description}</p>
+
+        <p>
+          <span class="tag">${tender.category}</span>
+          <span class="tag">${tender.type}</span>
+        </p>
+
+        <p class="deadline">
+          <strong>Location:</strong> ${tender.location}<br>
+          <strong>Closing date:</strong> ${formatDate(tender.deadline)}<br>
+          <strong>Deadline:</strong> ${deadlineText}
+        </p>
+
+        <div class="card-actions">
+          <button class="save-button" onclick="saveTender(${tender.id})">
+            ☆ Save Tender
+          </button>
+
+          <button class="button" onclick="viewTender(${tender.id})">
+            View Notice
+          </button>
+        </div>
+      </article>
+    `;
+  }).join("");
+}
+
+function saveTender(id) {
+  const tender = tenders.find(item => item.id === id);
+
+  showToast(
+    `"${tender.title}" is a demo listing. Account-based saving is not yet available.`
+  );
+}
+
+function viewTender(id) {
+  const tender = tenders.find(item => item.id === id);
+
+  showToast(
+    `"${tender.title}" is fictional sample data. No official notice is linked.`
+  );
+}
+
+document.getElementById("searchForm").addEventListener("submit", event => {
+  event.preventDefault();
+  renderTenders();
+
+  document.getElementById("tenders").scrollIntoView({
+    behavior: "smooth"
+  });
+});
+
+[
+  categoryFilter,
+  buyerFilter,
+  deadlineFilter,
+  openOnly
+].forEach(element => {
+  element.addEventListener("change", renderTenders);
+});
+
+document.getElementById("resetButton").addEventListener("click", () => {
+  searchInput.value = "";
+  categoryFilter.value = "";
+  buyerFilter.value = "";
+  deadlineFilter.value = "";
+  openOnly.checked = false;
+
+  renderTenders();
+});
+
+document.getElementById("subscribeForm").addEventListener("submit", event => {
+  event.preventDefault();
+
+  showToast(
+    "This is a demo. Email signup will work after a backend is connected."
+  );
+
+  event.target.reset();
+});
+
+document.getElementById("year").textContent = new Date().getFullYear();
+
+renderTenders();
+</script>
+
+</body>
+</html>
